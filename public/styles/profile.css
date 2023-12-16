@@ -1,0 +1,306 @@
+.profile-details{
+    display: block;
+    margin: 50px 200px;
+}
+
+.profile-header{
+    display: flex;
+
+}
+
+.profile-pic{
+    align-items: center;
+    padding: 5px 20px 5px 5px;
+    flex:0.125;
+}
+.profile-info{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    flex: 0.875;
+   
+}
+
+.profile-info h1{
+    font-family: 'Bungee Spice', sans-serif;
+    line-height: 2;
+    color: azure;
+    font-size: 2.8rem;
+}
+
+.profile-info h2{
+    line-height: 1.5;
+    color: azure;
+    font-size: 2em;
+}
+
+.profile-info p{
+    margin-top: 10px;
+    color:gray;
+    max-width: 700px;
+    font-size : medium;
+    line-height: 1.5;
+}
+
+.profile-info h4{
+    line-height: 2;
+    color: azure;
+}
+
+.profile-btns{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+}
+
+
+button.add,.profile-btn, button.update, button.search {
+    width: 300px;
+    height: max-content;
+  margin: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  font-size: large;
+}
+
+button.add:hover,.profile-btn:hover.button.update:hover, button.search:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+button.add:active,.profile-btn:active, button.update:active , button.search:active{
+  transform: scale(0.95);
+}
+
+
+/* for CRUD css */
+.new-book , .search-book{
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    }
+
+input[type="text"],input[type="date"],textarea {
+    text-align: left;
+    height: 60px;
+    top: 10px;
+    border: none;
+    background: white;
+    font-size: 20px;
+    font-weight: 200;
+    width: 80%;
+    padding: 10px 20px;
+    }
+
+    textarea {
+        resize: none;
+        overflow-y: hidden;
+        min-height: 60px;
+        max-height: 200px;
+        transition: height 0.2s ease; /* Add smooth transition for height changes */
+      }
+
+    input[name="book_summary"],input[name="book_notes"]{
+        font-size: 16pxpx;
+    }
+
+    input[type="text"]:focus,input[type="date"]:focus,textarea:focus {
+    outline: none;
+    box-shadow: inset 0 -3px 0 0 #f09819;
+    }
+
+
+::placeholder {
+    color: lightgray;
+    opacity: 1;
+    }
+
+.container{
+    width:800px;
+    background: #111;
+    padding: 20px 30px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container .star-widget input{
+    display: none;
+}
+
+.star-widget label{
+    font-size: 40px;
+    color: #444;
+    padding: 10px;
+    float: right;
+    transition: all 0.2s ease;
+}
+
+@media (max-width: 850px) {
+    .container{
+        width:500px;
+        padding: 10px 15px;
+    }
+    .star-widget label{
+        font-size: 30px;
+        padding: 5px;
+    }
+}
+
+@media (max-width: 600px) {
+    .container{
+        width:300px;
+        padding: 8px 12px;
+    }
+    .star-widget label{
+        font-size: 16px;
+        padding: 2px;
+    }
+}
+
+input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~ label{
+    color: #fd4;
+
+}
+
+input:checked ~ label{
+    color: #fd4;
+}
+
+input#rate-10:checked ~ label{
+    color: #fe7;
+    text-shadow: 0 0 20px #952;
+}
+
+.search-input{
+    color: #fff;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+#search-container{
+    margin-top: 50px;
+    display: flex;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-book{
+    align-items: center;
+}
+
+
+/* Remove button */
+.btn-remove-book{
+    background: red;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.15s ease;
+    padding: 5px;
+    display: block;
+    width:max-content;
+    height: max-content;
+    float:right;
+}
+.btn-remove-book:hover{
+    background: #FF7276;
+    color: white;
+    
+}
+.back{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    position: fixed;
+    width: 50%;
+    height: auto;
+    padding: 20px;
+    background-color: aliceblue;
+    color: #111;
+    overflow: hidden;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc; 
+    z-index: 999;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.back .buttons-yes-no{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.back p{
+    margin-bottom: 2rem;
+    font-size: larger;
+
+}
+
+.back pre{
+    margin-top: 1rem;
+}
+
+.back button{
+    padding: 12px 20px;
+    width: 30%;
+    margin: 0 5px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.back .btn_yes{
+    background-color: #008AD8;
+    color: white;
+}
+
+.back .btn_yes:hover{
+    background-color: lightblue;
+}
+
+.back .btn_no{
+    border: 2px solid #008AD8;;
+    color: #008AD8;
+}
+
+.back .btn_yes:hover{
+    background-color: #ddd;
+}

@@ -1,0 +1,28 @@
+<%- include('partials/header.ejs'); %>
+<%- include('partials/hero.ejs'); %>
+<%- include('partials/top3.ejs'); %>
+<%- include('partials/books.ejs'); %>
+	
+
+		<script>
+			const toggle_btn = document.querySelector('.toggle_btn')
+			const toggle_btnIcon = document.querySelector('.toggle_btn i')
+			const dropDownMenu = document.querySelector('.dropdown-menu')
+
+			toggle_btn.onclick = function(){
+				dropDownMenu.classList.toggle('open')
+				const isOpen = dropDownMenu.classList.contains('open')
+
+				toggle_btnIcon.classList = isOpen ?
+				'fa-solid fa-xmark' : 
+				'fa-solid fa-bars' 
+				// if isOpen is true then set class of toggle_btnIcon to fa-xmark otherwise fa-bars
+				// it fetches from cdn of cloudflare
+			}
+
+			
+		</script>
+	
+
+	</body>
+</html>

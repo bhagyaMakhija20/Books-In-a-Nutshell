@@ -1,0 +1,116 @@
+app.post("/add", async (req, res) => {
+      try{
+        const { newBook, date_read, book_notes, book_summary, author } = req.body;
+        const rate = parseInt(req.body.rate);
+
+        const books = await getBooks(newBook);
+        console.log('Books:\n', books);
+
+        // Default cover URL
+        // let coverUrl = "assets/images/defaultBookCover.jpeg"; 
+        // Construct the relative path from the project's root
+         const relativePath = join( 'assets', 'images', 'defaultBookCover.jpeg');
+        let coverUrl = relativePath.replace(/\\/g, '/');
+
+        if (books.length > 0) {
+            // Check if there is a similar match in book name and author name
+            // using stringSimilarity node module for pattern matching of input string(book_name) with the returned data
+            const matches = stringSimilarity.findBestMatch(newBook, books.map(book => book.title));
+            console.log("matches: ",matches);
+            const bestMatch = matches.bestMatch;
+            console.log("bestMatch: ",bestMatch);
+            if (bestMatch.rating > 0.6) {
+                const matchedBook = books.find(book => book.title === bestMatch.target);
+                if (matchedBook && matchedBook.coverUrl) {
+                  console.log("matchedBook.coverUrl : ",matchedBook.coverUrl);                    
+                }
+                else{
+                  // check 1: isbn coverUrl exists or not?
+                  let isCoverAvailable = await checkIfOpenLibraryCoverExists(matchedBook.coverUrl);
+
+                  if(isCoverAvailable){
+                    coverUrl = matchedBook.coverUrl;
+                  }
+
+                  else{
+                    // check 2: title coverUrl exists or not?
+                    const key = 'title'; // You can choose the key (title, ISBN, OCLC, LCCN, OLID, ID)
+                    const value = encodeURIComponent(matchedBook.title); // to replace white spaces in book name with %20
+                    console.log(value);
+                    const size = 'M'; // You can choose size (S, M, L)
+                    coverUrl = `https://covers.openlibrary.org/b/${key}/${value}-${size}.jpg`;
+
+                    isCoverAvailable = await checkIfOpenLibraryCoverExists(coverUrl);
+
+                    // Use the Open Library cover if available, otherwise use the local default cover
+                    coverUrl = isCoverAvailable ? coverUrl : '/assets/images/defaultBookCover.jpeg';
+                  }
+                }
+            }
+        }
+                
+      
+        // Fetch cover image URL from Open Library Covers API
+        /*
+         const key = 'title'; // You can choose the key (title, ISBN, OCLC, LCCN, OLID, ID)
+        const value = encodeURIComponent(newBook); // to replace white spaces in book name with %20
+
+        console.log(value);
+        const size = 'M'; // You can choose size (S, M, L)
+        const coverUrl = `https://covers.openlibrary.org/b/${key}/${value}-${size}.jpg?default=false`;
+        */
+
+        // not using this code to validate image urls, becauz now using direct results retreived from openlibrary api
+        /*
+        axios.head(coverUrl)
+        .then(response => {
+            if (response.status === 200) {
+                console.log('Image loaded successfully:', coverUrl);
+            } else {
+                console.log('Invalid image URL:', coverUrl);
+            }
+        })
+        .catch(error => {
+            console.error('Error checking image URL:', error.message);
+        });
+        */
+        // Check if the coverUrl is a valid URL 
+        /*
+        if (!isValidUrl(coverUrl)) {
+          // Set a default image URL if the coverUrl is not valid
+          coverUrl = "assets/images/defaultBookCover.jpeg"; 
+          console.log(coverUrl);
+        }
+        else{
+          console.log(coverUrl);
+        }
+        */
+
+        let author_id;
+        const authorFetched = await db.query(
+          "select id from authors where author_name like $1 ",['%' + author + '%']
+        );
+
+        if(authorFetched.rows.length == 1){
+          author_id = parseInt(authorFetched.rows[0].id);
+        }
+        else{
+          console.log("Unable to fetch author id for author : ",author);
+          const result = await db.query(
+            "insert into authors (author_name)  values($1) returning id",[author]
+          );
+          author_id = parseInt(result.rows[0].id);
+        }
+
+
+        // Save the book to the database (you can replace this with your database logic)
+        await db.query("Insert into books (book_name,author_id,date_read,rating,book_summary,book_cover,about_book) values($1,$2,$3,$4,$5,$6,$7)",
+        [newBook,author_id,date_read,rate,book_notes,coverUrl,book_summary]);
+        res.redirect("/");
+      }
+      catch(e){
+        console.log("error adding new book!");
+        console.log(e);
+      }
+      
+    });

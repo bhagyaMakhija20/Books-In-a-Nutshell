@@ -1,0 +1,37 @@
+<header>
+    <div class="navbar" >
+        
+        <div class="logo"><a href="/">In a Nutshell Books</a></div>
+
+        <ul class="links">
+            <li><a href ="/">Home</a></li>
+            <li><a href ="about">About</a></li>
+            <li><a href ="services">Services</a></li>
+            <li><a href ="contact">Contact</a></li>
+        </ul>
+        <!-- Check if the user is logged in -->
+        <% if (locals.username) { %>
+            <a href="/profile" id="get-started-btn" class="action-btn"><%= username %></a>
+        <% } else { %>
+            <a href="/login" id="get-started-btn" class="action-btn">Get Started</a>
+        <% } %>
+        <!-- <a href="/login" id ="get-started-btn" class="action-btn">Get Started</a> -->
+        <div class="toggle_btn">
+            <i class="fa-solid fa-bars"></i>
+            <!-- for hamburger icon using font-awesome cdn -->
+        </div>
+    </div>
+
+    <div class="dropdown-menu">
+        <li><a href ="/">Home</a></li>
+        <li><a href ="about">About</a></li>
+        <li><a href ="services">Services</a></li>
+        <li><a href ="contact">Contact</a></li>
+         <!-- Check if the user is logged in -->
+         <% if (locals.username) { %>
+            <li><a href="/profile"  class="action-btn"><%= username %></a></li>
+        <% } else { %>
+            <li><a href="/login"  class="action-btn">Get Started</a></li>
+        <% } %>
+    </div>
+</header>

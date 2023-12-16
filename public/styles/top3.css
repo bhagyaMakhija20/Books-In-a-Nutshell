@@ -1,0 +1,156 @@
+.top3-section{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #07091D;
+
+}
+
+.top3-header{
+    display: block;
+    background: #07091D;
+    text-align: center;
+    padding: 20px 0 30px;
+    font-size: xx-large;
+}
+.top3-h2
+{
+    color:white;
+    font-family: 'Roboto Slab', serif;
+}
+
+.styled-number{
+    font-family: 'Bungee Spice', sans-serif;
+}
+
+.wrapper{
+    display: flex;
+    width: 70%;
+    justify-content: space-around;
+}
+
+.card{
+    width: 280px;
+    height: 350px;
+    padding: 2rem 1rem;
+    background: #fff;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    box-shadow: 10px 10px 10px 5px rgba(224, 211, 132, 0.5);
+    /* from left,from top,blur,size,color of shadow */
+    transition: 0.5s ease-in-out;
+}
+
+.card:hover{
+    transform: translateY(20px);
+}
+
+.card:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,orange,rgba(255, 235, 40, 1));
+    z-index: 1;
+    transition: 0.5s all;
+    opacity: 0;
+}
+
+.card:hover:before{
+    opacity: 1;
+}
+
+.card img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+.card .info{
+    position: relative;
+    z-index: 3;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.5s all;
+    width: 100%;
+    height: 100%;
+}
+
+.card:hover .info{
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.card .info h1{
+    margin: 5px 5px 20px;
+    font-size: xx-large;
+}
+
+.card .info h2{
+    font-size: large;
+}
+.card .info p{
+    letter-spacing: 1px;
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    max-height: 50px;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    /* white-space: nowrap; */
+}
+
+.card .info .btn-read-more{
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+    background: #fff;
+}
+
+.card .info .btn-read-more:hover{
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+    
+}
+
+/* For Responsive design of navbar*/
+@media (max-width: 1400px){
+    .card{
+        width: 210px;
+        height: 280px;
+    }
+}
+
+@media (max-width: 1090px){
+    .card{
+        width: 175px;
+        height: 245px;
+    }
+}
+
+@media (max-width: 990px){
+    .wrapper{
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        margin: 50px;
+    }
+    .card{
+        width: 280px;
+        height: 350px;
+    }
+}

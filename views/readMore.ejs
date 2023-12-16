@@ -1,0 +1,47 @@
+<%- include('partials/header.ejs'); %>
+<%- include('partials/navbar.ejs'); %>
+
+<div class="book-details">
+    <% if(locals.book) {%>
+    <div class="book-header">
+        <img src = <%= book.book_cover %> alt= <%= book.book_name %> >
+        <div class="book-info">
+            <h1><%= book.book_name %></h1>
+            <h2>By :- <%= book.author_name %></h2>
+            <h4>Date read : <%= book.date_read %></h4>
+            <h4>Recommend it : <%= book.rating %>/10</h4>
+            <p><%= book.about_book %></p>
+            
+        </div>
+    </div>
+    
+    <h4 class="notes-h4">My Notes of this book</h4>
+    <p class="notes-p"><%= book.book_summary %></p>
+    <%} else{ %>
+        <div class="book-info">
+            <h1>No Books to Show!</h1>
+        </div>
+       
+    <% } %>
+</div>
+
+		<script>
+			const toggle_btn = document.querySelector('.toggle_btn')
+			const toggle_btnIcon = document.querySelector('.toggle_btn i')
+			const dropDownMenu = document.querySelector('.dropdown-menu')
+
+			toggle_btn.onclick = function(){
+				dropDownMenu.classList.toggle('open')
+				const isOpen = dropDownMenu.classList.contains('open')
+
+				toggle_btnIcon.classList = isOpen ?
+				'fa-solid fa-xmark' : 
+				'fa-solid fa-bars' 
+				// if isOpen is true then set class of toggle_btnIcon to fa-xmark otherwise fa-bars
+				// it fetches from cdn of cloudflare
+			}
+		</script>
+	
+
+	</body>
+</html>

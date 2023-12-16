@@ -1,0 +1,49 @@
+<%- include('partials/header.ejs'); %>
+<%- include('partials/navbar.ejs'); %>
+
+<div class="profile-details">
+    <% if(locals.user) {%>
+    <div class="profile-header">
+        <div class="profile-pic"><i style="font-size: 100px;color: aliceblue;"class="fa fa-user" aria-hidden="true"></i></div>
+        <div class="profile-info">
+            <h1>Username : <%= user.username %></h1>
+            <h2>Email : <%= user.email %></h2>         
+        </div>
+    </div>
+    <hr style=" margin: 80px 20px; border: 2px solid white;">
+
+    <div class="profile-btns">
+        <a href="/add"> <button class="profile-btn" role="button">Add a new Book</button> </a>
+        <a href="/remove"> <button class="profile-btn" role="button">Remove a book</button> </a>
+        <a href="/update"> <button class="profile-btn" role="button">Update book details</button> </a>
+        <button class="profile-btn" role="button">Log Out</button>
+    </div>
+   
+    <%} else{ %>
+        <div class="profile-info">
+            <h1>No Books to Show!</h1>
+        </div>
+       
+    <% } %>
+</div>
+
+		<script>
+			const toggle_btn = document.querySelector('.toggle_btn')
+			const toggle_btnIcon = document.querySelector('.toggle_btn i')
+			const dropDownMenu = document.querySelector('.dropdown-menu')
+
+			toggle_btn.onclick = function(){
+				dropDownMenu.classList.toggle('open')
+				const isOpen = dropDownMenu.classList.contains('open')
+
+				toggle_btnIcon.classList = isOpen ?
+				'fa-solid fa-xmark' : 
+				'fa-solid fa-bars' 
+				// if isOpen is true then set class of toggle_btnIcon to fa-xmark otherwise fa-bars
+				// it fetches from cdn of cloudflare
+			}
+		</script>
+	
+
+	</body>
+</html>

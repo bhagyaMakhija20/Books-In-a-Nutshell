@@ -1,0 +1,52 @@
+<div class="top3-header">
+    <h2 class="top3-h2">My top </h2>
+    <h2 class="styled-number">3</h2>
+    <h2 class="top3-h2">Recommendations</h2>
+</div>
+
+<section class = "top3-section">
+    <div class="wrapper">
+
+        <% if(locals.top3books) {%>
+            <% top3books.forEach(function(book) { %>
+                <div class="card" name ="book" value="<%= book.id %>" id="<%= book.id %>">
+                    <img class ="card-type1" src = <%= book.book_cover %> alt="pom">
+                    <div class ="info">
+                        <h1>"<%= book.book_name %>"</h1>
+                        <h2>~ <%= book.author_name %></h2>
+                        <p><%= book.about_book %></p>
+                        <a href="/readMore/<%= book.id %>" class="btn-read-more">Read More</a>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else{ %>
+            <div class="card">
+                <div class = "info">
+                    <h1>No books to show!</h1>
+                </div>
+            </div>
+        <% } %>
+
+        
+
+        <!-- <div class="card">
+            <img class ="card-type1" src = "assets/images/atomic-habits.jpeg" alt="atomic-habits">
+            <div class ="info">
+                <h1>Heading</h1>
+                <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p>
+                <a href="/readMore" class="btn-read-more">Read More</a>
+            </div>
+        </div>
+
+        <div class="card"> -->
+            <!-- ../../public/assets/images/richDad-poorDad.jpeg -->
+            <!-- <img class ="card-type1" src = "assets/images/richDad-poorDad.jpeg" alt="richDad-poorDad">
+            <div class ="info">
+                <h1>Heading</h1>
+                <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p>
+                <a href="/readMore" class="btn-read-more">Read More</a>
+            </div>
+        </div> -->
+        
+    </div>
+</section>

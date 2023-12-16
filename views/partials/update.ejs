@@ -1,0 +1,104 @@
+<%- include('./header.ejs'); %>
+<%- include('./navbar.ejs'); %>
+
+<% if(!locals.matchingBooks && !locals.selectedBook){ %>
+<form class="search-book" action="/update/search" method="post">
+    <div id="search-container">
+        <label class ="search-input" for="search-input">Search for books:</label>
+        <input type="text" id="search-input" name="search_term">
+    </div>
+    <button class="search" type="submit">Search</button>
+</form>
+<% } else if(!locals.selectedBook){ %>
+
+    <section class="books-section">
+        <% matchingBooks.forEach(function(book) { %>
+            <div class="book-card">
+                <img src = <%= book.book_cover %> alt= <%= book.book_name %> >
+                <div class="card-info">
+                    <h1><%= book.book_name %></h1>
+                    <h4>Date read : <%= book.date_read.toISOString().split('T')[0]; %></h4>
+                    <h4>Recommend it : <%= book.rating %>/10</h4>
+                    <p>
+                    <%= book.about_book %>
+                    </p>
+                    <p><%= book.book_cover %></p>
+                    <a href="/update/<%= book.id %>" class="btn-read-more">Update</a>
+                </div>
+            
+            </div>
+        <% }); %>
+    </section>
+
+    
+<% } else { %>
+    <div class= "book-details">
+        <form class="new-book" action="/update" method="post">
+            
+            <input name="book_id" style = "display: none;" value="<%= selectedBook.id %>" ><%= selectedBook.id %></input>
+            <input type="text" name="newBook" value="<%= selectedBook.book_name %>" autocomplete="off" autofocus="true" />
+            <input type="text" name="author" value="<%= author_name %>" autocomplete="off" />
+            <input type="date" name="date_read" value="<%= selectedBook.date_read %>" autocomplete="off" />
+            <input type="text" name="about_book" value="<%= selectedBook.about_book %>" autocomplete="off" />
+            <textarea name="book_summary" id="book_summary"  rows="4" autocomplete="off"><%= selectedBook.book_summary %></textarea>
+    
+            <div class="container">
+                <div class="star-widget">
+                    <% for (let i = 10; i >= 1; i--) { %>
+                        <input
+                            type="radio"
+                            name="rate"
+                            id = <%= "rate-" + i %>
+                            value = <%= i %>
+                            <% if (i === selectedBook.rating) { %>
+                                checked
+                            <% } %>
+                        >
+                        <label for=<%= "rate-" + i %> class="fas fa-star"></label>
+                    <% } %>
+                </div>
+            </div>
+    
+            <button class="update" type="submit" value="update" > Update </button>
+        </form>
+    </div>
+<% } %>
+
+
+
+		<script>
+			const toggle_btn = document.querySelector('.toggle_btn')
+			const toggle_btnIcon = document.querySelector('.toggle_btn i')
+			const dropDownMenu = document.querySelector('.dropdown-menu')
+
+			toggle_btn.onclick = function(){
+				dropDownMenu.classList.toggle('open')
+				const isOpen = dropDownMenu.classList.contains('open')
+
+				toggle_btnIcon.classList = isOpen ?
+				'fa-solid fa-xmark' : 
+				'fa-solid fa-bars' 
+				// if isOpen is true then set class of toggle_btnIcon to fa-xmark otherwise fa-bars
+				// it fetches from cdn of cloudflare
+			}
+
+            // for textarea
+            const textarea = document.getElementById('book_summary');
+            const maxHeight = 200; // Set your desired maximum height
+
+            textarea.addEventListener('input', function() {
+                // Auto-resize the textarea based on its scrollHeight
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+
+                // Enable scrolling when the textarea exceeds the maxHeight
+                this.style.overflowY = this.scrollHeight > maxHeight ? 'auto' : 'hidden';
+            });
+
+            // Trigger the input event initially to set the initial height
+            textarea.dispatchEvent(new Event('input'));
+		</script>
+	
+
+	</body>
+</html>

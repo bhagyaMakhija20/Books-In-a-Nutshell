@@ -1,0 +1,40 @@
+<section class="books-section">
+
+    <h2>Books I've read...</h2>
+   
+    <% if(locals.allBooks) { %>
+        <% allBooks.forEach(function(book) { %>
+            <div class="book-card">
+                <img src = <%= book.book_cover %> alt= <%= book.book_name %> >
+                <div class="card-info">
+                    <h1><%= book.book_name %></h1>
+                    <h4>Date read : <%= book.date_read %></h4>
+                    <h4>Recommend it : <%= book.rating %>/10</h4>
+                    <p>
+                    <%= book.about_book %>
+                    </p>
+                    <a href="/readMore/<%= book.id %>" class="btn-read-more">Read More</a>
+                </div>
+            
+            </div>
+        <% }) %>
+    <% } %>
+
+
+    <!-- <div class="book-card">
+        <img src = "assets/images/pom.jpeg" alt="pom">
+        <div class="card-info">
+            <h1>psychology of money</h1>
+            <h4>Date read:DD-MM-YYYY</h4>
+            <h4>Recommend it: 10/10</h4>
+            <p>
+                A book that explores the strange ways people think about money and teaches you how to manage it, invest it, and make business decisions.A book that explores the strange ways people think about money and teaches you how to manage it, invest it, and make business decisions.
+            </p>
+            <a href="#" class="btn-read-more">Read More</a>
+        </div>
+       
+    </div> -->
+   
+       
+    </div>
+</section>

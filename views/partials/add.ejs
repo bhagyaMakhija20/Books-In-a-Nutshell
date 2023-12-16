@@ -1,0 +1,61 @@
+<%- include('./header.ejs'); %>
+<%- include('./navbar.ejs'); %>
+
+<div class= "book-details">
+    <form class="new-book" action="/add" method="post">
+
+        <input type="text" name="newBook" placeholder="Book Name" autocomplete="off" autofocus="true" required />
+        <input type="text" name="author" placeholder="Author Name" autocomplete="off" required/>
+        <input type="date" name="date_read" placeholder="Date Read" autocomplete="off" required/>
+        <input type="text" name="book_summary" placeholder="Book Summary" autocomplete="off" required/>
+        <textarea name="book_notes" placeholder="Book Notes" rows="4" autocomplete="off" required></textarea>
+
+        <div class="container">
+            <div class="star-widget">
+                <input type="radio" name="rate" id="rate-10" value="10" required>
+                <label for="rate-10" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-9" value="9">
+                <label for="rate-9" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-8" value="8">
+                <label for="rate-8" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-7" value="7">
+                <label for="rate-7" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-6" value="6">
+                <label for="rate-6" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-5" value="5">
+                <label for="rate-5" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-4" value="4">
+                <label for="rate-4" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-3" value="3">
+                <label for="rate-3" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-2" value="2">
+                <label for="rate-2" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-1" value="1">
+                <label for="rate-1" class="fas fa-star"></label>
+            </div>
+        </div>
+
+        <button class="add" type="submit" name="list" value="add" > Add </button>
+    </form>
+</div>
+
+		<script>
+			const toggle_btn = document.querySelector('.toggle_btn')
+			const toggle_btnIcon = document.querySelector('.toggle_btn i')
+			const dropDownMenu = document.querySelector('.dropdown-menu')
+
+			toggle_btn.onclick = function(){
+				dropDownMenu.classList.toggle('open')
+				const isOpen = dropDownMenu.classList.contains('open')
+
+				toggle_btnIcon.classList = isOpen ?
+				'fa-solid fa-xmark' : 
+				'fa-solid fa-bars' 
+				// if isOpen is true then set class of toggle_btnIcon to fa-xmark otherwise fa-bars
+				// it fetches from cdn of cloudflare
+			}
+		</script>
+	
+
+	</body>
+</html>
