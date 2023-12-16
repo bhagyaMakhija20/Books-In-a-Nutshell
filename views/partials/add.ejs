@@ -53,6 +53,22 @@
 				'fa-solid fa-bars' 
 				// if isOpen is true then set class of toggle_btnIcon to fa-xmark otherwise fa-bars
 				// it fetches from cdn of cloudflare
+
+                // for textarea
+                const textarea = document.getElementById('book_notes');
+                const maxHeight = 200; // Set your desired maximum height
+
+                textarea.addEventListener('input', function() {
+                    // Auto-resize the textarea based on its scrollHeight
+                    this.style.height = 'auto';
+                    this.style.height = (this.scrollHeight) + 'px';
+
+                    // Enable scrolling when the textarea exceeds the maxHeight
+                    this.style.overflowY = this.scrollHeight > maxHeight ? 'auto' : 'hidden';
+                });
+
+                // Trigger the input event initially to set the initial height
+                textarea.dispatchEvent(new Event('input'));
 			}
 		</script>
 	
